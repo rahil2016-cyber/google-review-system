@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum ClientStatus {
+  ACTIVE
+  LOCKED
+}
+
+enum PlanType {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+model SuperAdmin {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Client {
+  id           String       @id @default(cuid())
+  businessName String
+  ownerName    String
+  email        String       @unique
+  passwordHash String
+  uniqueCode   String       @unique
+  plan         PlanType     @default(FREE)
+  status       ClientStatus @default(ACTIVE)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  restaurants  Restaurant[]
+  feedback     Feedback[]
+  ratingEvents RatingEvent[]
+  scans        QrScan[]
+}
+
+model Restaurant {
+  id              String        @id @default(cuid())
+  clientId        String
+  restaurantName  String
+  googleReviewUrl String
+  uniqueCode      String        @unique
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  client          Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  feedback        Feedback[]
+  ratingEvents    RatingEvent[]
+  scans           QrScan[]
+
+  @@index([clientId])
+}
+
+model Feedback {
+  id              String     @id @default(cuid())
+  clientId        String
+  restaurantId    String
+  rating          Int
+  customerName    String
+  customerPhone   String?
+  customerEmail   String?
+  feedbackMessage String?
+  createdAt       DateTime   @default(now())
+  client          Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  restaurant      Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+  @@index([restaurantId, createdAt])
+}
+
+model RatingEvent {
+  id           String     @id @default(cuid())
+  clientId     String
+  restaurantId String
+  rating       Int
+  createdAt    DateTime   @default(now())
+  client       Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+  @@index([restaurantId, rating])
+}
+
+model QrScan {
+  id           String     @id @default(cuid())
+  clientId     String
+  restaurantId String
+  createdAt    DateTime   @default(now())
+  client       Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+  @@index([restaurantId, createdAt])
+}
