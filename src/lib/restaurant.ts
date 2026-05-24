@@ -1,7 +1,18 @@
 import { Restaurant } from "./types";
 
 export function buildFunnelUrl(slug: string, appBaseUrl?: string): string {
-  const envUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+  const appEnv = process.env.NEXT_PUBLIC_APP_URL;
+  const vercelUrl = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+
+  let envUrl: string | undefined;
+  if (appEnv && !appEnv.includes("localhost")) {
+    envUrl = appEnv;
+  } else if (vercelUrl) {
+    envUrl = vercelUrl;
+  } else {
+    envUrl = appEnv;
+  }
+
   const baseUrl = envUrl ? (envUrl.startsWith("http") ? envUrl : `https://${envUrl}`) : "http://localhost:3000";
   const base = (appBaseUrl ?? baseUrl).replace(/\/$/, "");
   return `${base}/funnel/${slug}`;
