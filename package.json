@@ -20,7 +20,8 @@
     "prisma:format": "prisma format --schema prisma/schema.prisma",
     "db:push": "prisma db push --schema prisma/schema.prisma",
     "db:seed": "prisma db seed",
-    "db:setup": "npm run prisma:generate && npm run db:push && npm run db:seed"
+    "db:setup": "npm run prisma:generate && npm run db:push && npm run db:seed",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
