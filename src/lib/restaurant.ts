@@ -7,12 +7,12 @@ export function buildFunnelUrl(slug: string, appBaseUrl?: string): string {
   return `${base}/funnel/${slug}`;
 }
 
-export function buildReviewTemplates(restaurantName: string): string[] {
+export function buildReviewTemplates(businessName: string): string[] {
   return [
-    `Absolutely loved the food and ambience at ${restaurantName}. The service was quick and very courteous. Highly recommended!`,
-    `Great experience at ${restaurantName}. Tasty food, clean place, and staff were very friendly. Will definitely visit again.`,
-    `One of the best places for family dining. ${restaurantName} served delicious dishes with excellent hospitality.`,
-    `Amazing quality and presentation. The team at ${restaurantName} made us feel welcome. Wonderful overall experience.`,
+    `Absolutely loved the service and atmosphere at ${businessName}. The team was quick, professional, and very courteous. Highly recommended!`,
+    `Great experience with ${businessName}. High-quality service, clean environment, and staff were very friendly. Will definitely visit again.`,
+    `One of the best places for professional and reliable service. ${businessName} delivered excellent hospitality and support.`,
+    `Amazing quality and attention to detail. The team at ${businessName} made us feel welcome and the overall experience was wonderful.`,
   ];
 }
 

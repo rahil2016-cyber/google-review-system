@@ -119,7 +119,7 @@ export default function SuperAdminClientsPage() {
               ["ownerName", "Owner name"],
               ["email", "Login email"],
               ["password", "Password"],
-              ["restaurantName", "Restaurant / location name"],
+              ["restaurantName", "Business / location name"],
               ["googleReviewUrl", "Google review URL"],
             ] as const
           ).map(([key, label]) => (

@@ -78,7 +78,7 @@ export function ReviewFunnel({ restaurantName, googleReviewUrl, tenantSlug, appB
         {state === "rate" && (
           <div className="space-y-5 text-center">
             <h1 className="text-3xl font-bold tracking-tight text-amber-100">{restaurantName}</h1>
-            <p className="text-zinc-300">How was your dining experience?</p>
+            <p className="text-zinc-300">How was your experience?</p>
             <StarRating selected={rating} onSelect={handleRatingSelect} />
             <div className="space-y-2 rounded-xl border border-amber-100/10 bg-zinc-900/60 p-3">
               <p className="text-xs text-zinc-400">Scan to share this review page</p>

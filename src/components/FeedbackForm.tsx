@@ -13,7 +13,7 @@ export function FeedbackForm({ rating, onSubmit }: FeedbackFormProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [reason, setReason] = useState<LowRatingReason>("Service issue");
+  const [reason, setReason] = useState<LowRatingReason>("Service quality");
   const [comments, setComments] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
