@@ -17,6 +17,8 @@ export function slugifyBusinessName(name: string): string {
 }
 
 export function buildPublicRatingUrl(uniqueCode: string, appUrl?: string): string {
-  const base = (appUrl ?? process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+  const baseUrl = envUrl ? (envUrl.startsWith("http") ? envUrl : `https://${envUrl}`) : "http://localhost:3000";
+  const base = (appUrl ?? baseUrl).replace(/\/$/, "");
   return `${base}/r/${uniqueCode}`;
 }
