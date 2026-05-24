@@ -23,6 +23,9 @@
     "db:setup": "npm run prisma:generate && npm run db:push && npm run db:seed",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "firebase": "^12.12.1",
