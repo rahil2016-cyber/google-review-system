@@ -69,7 +69,9 @@ export function ReviewFunnel({ restaurantName, googleReviewUrl, tenantSlug, appB
   async function handlePositiveReview() {
     const copied = await copyText(selectedTemplate);
     setCopyStatus(copied ? "success" : "failed");
-    window.open(googleReviewUrl, "_blank", "noopener,noreferrer");
+    setTimeout(() => {
+      window.location.href = googleReviewUrl;
+    }, 1000);
   }
 
   return (

@@ -88,7 +88,9 @@ export function PublicRatingFlow({ uniqueCode }: PublicRatingFlowProps) {
     if (!restaurant) return;
     const copied = await copyText(selectedTemplate);
     setCopyStatus(copied ? "success" : "failed");
-    window.open(restaurant.googleReviewUrl, "_blank", "noopener,noreferrer");
+    setTimeout(() => {
+      window.location.href = restaurant.googleReviewUrl;
+    }, 1000);
   }
 
   async function handleRatingSelect(value: number) {
