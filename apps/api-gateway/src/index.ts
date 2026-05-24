@@ -15,6 +15,7 @@ import { reviewsRouter } from "./routes/reviews.js";
 
 const app = express();
 app.disable("x-powered-by");
+// @ts-ignore: helmet typing mismatch in some strict ESM environments
 app.use(helmet());
 app.use(cors({ origin: env.CORS_ORIGIN === "*" ? true : env.CORS_ORIGIN }));
 app.use(express.json({ limit: "1mb" }));
